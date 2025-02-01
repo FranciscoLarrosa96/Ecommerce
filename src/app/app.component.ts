@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { SharedSignalsService } from './shared/services/shared-signals.service';
 import { animationsCustom } from './animations';
 import { MatDialog } from '@angular/material/dialog';
-import { LoginComponent } from './pages/login/login';
+import { LoginComponent } from './components/login/login';
 import {  HelperService } from './shared/helpers/helper.service';
 @Component({
   selector: 'app-root',

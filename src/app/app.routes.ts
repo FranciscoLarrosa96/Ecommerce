@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
-import { userResolve } from './pages/profile/user.service';
+import { userResolve } from './components/profile/user.service';
 
 export const routes: Routes = [
     {
@@ -10,27 +10,27 @@ export const routes: Routes = [
     },
     {
         path: 'home',
-        loadComponent: () => import('./pages/home/home.component').then(component => component.HomeComponent)
+        loadComponent: () => import('./components/home/home.component').then(component => component.HomeComponent)
     },
     {
         path: 'product/:id',
-        loadComponent: () => import('./pages/product/product.component').then(component => component.ProductComponent)
+        loadComponent: () => import('./components/product/product.component').then(component => component.ProductComponent)
     },
     {
         path: 'cart',
-        loadComponent: () => import('./pages/cart/cart.component').then(component => component.CartComponent)
+        loadComponent: () => import('./components/cart/cart.component').then(component => component.CartComponent)
     },
     {
         path: 'profile',
         canActivate: [AuthGuard],
-        loadComponent: () => import('./pages/profile/profile').then(component => component.ProfileComponent),
+        loadComponent: () => import('./components/profile/profile').then(component => component.ProfileComponent),
         resolve: {
             userLogged : userResolve
         }
     },
     {
         path: 'register',
-        loadComponent: () => import('./pages/register/register').then(component => component.RegisterComponent)
+        loadComponent: () => import('./components/register/register').then(component => component.RegisterComponent)
     },
     {
         path: '**',
