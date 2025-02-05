@@ -1,0 +1,1 @@
+var e={production:!0,API_AUTH:"https://ecommerce2024-backend.onrender.com/api",API_USER:"https://ecommerce2024-backend.onrender.com/api/user",API_MP:"https://ecommerce2024-backend.onrender.com/api/mercadopago"};export{e as a};
