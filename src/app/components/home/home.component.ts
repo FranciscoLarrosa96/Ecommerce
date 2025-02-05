@@ -24,7 +24,7 @@ export class HomeComponent {
       img: 'assets/img/products/a620.webp',
       title: 'Mother Gigabyte A620 S2h Ddr5 Amd Am5 M.2 Pcie 4.0 Pcreg',
       description: '',
-      price: 193007,
+      unit_price: 193007,
       arrayImgs: [
         "assets/img/products/imgForProduct/a620/a620-0.webp",
         "assets/img/products/imgForProduct/a620/a620-1.webp",
@@ -38,7 +38,7 @@ export class HomeComponent {
       img: 'assets/img/products/a620m-k.webp',
       title: 'Mother A620M-K',
       description: '',
-      price: 1100000,
+      unit_price: 1100000,
       review: { stars: 5, description: 'asd' }
     },
     {
@@ -46,7 +46,7 @@ export class HomeComponent {
       img: 'assets/img/products/b650-a.webp',
       title: 'Mother A620',
       description: '',
-      price: 100000,
+      unit_price: 100000,
 
     },
     {
@@ -54,7 +54,7 @@ export class HomeComponent {
       img: 'assets/img/products/b650m-a.webp',
       title: 'Mother A620',
       description: '',
-      price: 100000,
+      unit_price: 100000,
 
     },
     {
@@ -62,7 +62,7 @@ export class HomeComponent {
       img: 'assets/img/products/b650m-h.webp',
       title: 'Mother A620',
       description: '',
-      price: 100000,
+      unit_price: 100000,
 
     },
     {
@@ -70,7 +70,7 @@ export class HomeComponent {
       img: 'assets/img/products/x670.webp',
       title: 'Mother A620',
       description: '',
-      price: 100000,
+      unit_price: 100000,
 
     },
     {
@@ -78,7 +78,7 @@ export class HomeComponent {
       img: 'assets/img/products/x670e.webp',
       title: 'Mother A620',
       description: '',
-      price: 100000,
+      unit_price: 100000,
 
     }
   ];

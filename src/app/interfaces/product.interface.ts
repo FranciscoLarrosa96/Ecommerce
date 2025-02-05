@@ -1,12 +1,13 @@
 export interface Product {
-    id:string,
-    img: string,
+    id: string,
+    img?: string,
     title: string,
-    description: string,
-    price: number,
-    arrayImgs?:string[],
+    description?: string,
+    arrayImgs?: string[],
     review?: {
-        stars : number,
-        description? : string
-    }
+        stars: number,
+        description?: string
+    },
+    quantity?: number,
+    unit_price: number
 }
