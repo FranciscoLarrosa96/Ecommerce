@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
    _authSvc = inject(AuthService);
 
   constructor() { }
-  //TODO:"Arreglar probar llamar service en un resolve router"
+  //TODO:Manejar error 401
 
 
 

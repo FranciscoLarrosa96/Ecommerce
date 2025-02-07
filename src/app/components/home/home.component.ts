@@ -2,22 +2,25 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, effect, inject } from '@angular/core
 import { Product } from '../../interfaces/product.interface';
 import { CommonModule } from '@angular/common';
 import { register } from 'swiper/element/bundle';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MaterialModule } from '../../shared/material.module';
+import { SharedSignalsService } from '../../shared/services/shared-signals.service';
 register();
 
 @Component({
-    selector: 'app-home',
-    imports: [CommonModule, RouterModule, MaterialModule],
-    templateUrl: './home.component.html',
-    styleUrl: './home.component.scss',
-    schemas: [
-        CUSTOM_ELEMENTS_SCHEMA
-    ]
+  selector: 'app-home',
+  imports: [CommonModule, RouterModule, MaterialModule],
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.scss',
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ]
 })
 export class HomeComponent {
+  private _sharedSignalsService = inject(SharedSignalsService);
+  private _router = inject(Router);
   mouseHover: boolean[] = [];
-  sideNavOpacity:string = '1';
+  sideNavOpacity: string = '1';
   items: Product[] = [
     {
       id: '1',
@@ -102,6 +105,11 @@ export class HomeComponent {
    */
   hiddenDescription(index: number) {
     this.mouseHover[index] = false;
+  }
+
+  goToProduct(product: Product) {
+    this._sharedSignalsService.productSignal.set(product);
+    this._router.navigate(['/product/' + product.id]);
   }
 
 }

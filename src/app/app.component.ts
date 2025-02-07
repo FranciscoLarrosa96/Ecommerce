@@ -9,9 +9,10 @@ import { animationsCustom } from './animations';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from './components/login/login';
 import {  HelperService } from './shared/helpers/helper.service';
+import { FooterComponent } from './shared/footer/footer.component';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MaterialModule, ReactiveFormsModule, CommonModule, RouterModule],
+  imports: [RouterOutlet, MaterialModule, ReactiveFormsModule, CommonModule, RouterModule, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   animations: animationsCustom,
