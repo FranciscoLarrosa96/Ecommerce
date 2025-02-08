@@ -147,3 +147,17 @@
     right: 0;
     bottom: 0;
 }
+
+.btnCartContainer{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 1rem;
+    > button {
+        background-color: var(--main-color);
+        > mat-icon{
+            color: white;
+        }
+    }
+    
+}

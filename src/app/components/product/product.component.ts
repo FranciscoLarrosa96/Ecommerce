@@ -1,19 +1,28 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { MaterialModule } from '../../shared/material.module';
-import { MercadoPagoComponent } from '../mercadopago/mercadopago.component';
 import { SharedSignalsService } from '../../shared/services/shared-signals.service';
+import { CheckWindowsSiceService } from '../../shared/services/check-windows-sice.service';
 
 
 @Component({
     selector: 'app-product',
-    imports: [CommonModule, MaterialModule, MercadoPagoComponent],
+    imports: [CommonModule, MaterialModule],
     templateUrl: './product.component.html',
     styleUrl: './product.component.scss'
 })
 export class ProductComponent implements OnInit {
     _sharedSignalsService = inject(SharedSignalsService);
+    windowWidthSvc = inject(CheckWindowsSiceService);
     currentIndex: number = 0;
+
+    /**
+     * Detect changes in the device size
+     */
+    detectDevice = effect(() => {
+        console.log('deviceType', this.windowWidthSvc.deviceTypeComputed());
+    });
+
     constructor() { }
 
 

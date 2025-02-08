@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { MercadoPagoService } from './mercadopago.service';
 import { Product } from '../../interfaces/product.interface';
 
@@ -16,16 +16,20 @@ const mp = new MercadoPago('TEST-e5a29134-d5f2-43e1-92eb-1358ded6d7f6', {
 })
 export class MercadoPagoComponent implements OnInit {
   private mercadoPagoService = inject(MercadoPagoService);
-
+  product = input<Product>({ id: '', title: '', quantity: 0, unit_price: 0 });
   constructor() { }
 
   ngOnInit(): void {
+    this.initMercadoPago();
+  }
+
+  initMercadoPago() {
     const productTst: Product = {
-      id: '1',
-      title: 'Producto de prueba',
-      quantity: 1,
-      unit_price: 1000,
-    }
+      id: this.product().id,
+      title: this.product().title,
+      quantity: this.product().quantity,
+      unit_price: this.product().unit_price,
+    };
     // Llamar al backend para obtener el preferenceId
     // Aquí deberías hacer una petición HTTP a tu backend para obtener el preferenceId
     this.mercadoPagoService.getPreferenceId(productTst)

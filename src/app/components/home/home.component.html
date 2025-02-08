@@ -1,7 +1,7 @@
 <div class="homeContainer">
     <div class="homeContainer__list">
-        @for (item of items; track item.id) {
-        <div (click)="goToProduct(item)" class="card" (mouseenter)="showDescription($index)"
+        @for (item of filteredProducts; track item.id) {
+        <div (click)="goToProduct(item)" class="card relative" (mouseenter)="showDescription($index)"
             (mouseleave)="hiddenDescription($index)" [class.mouseHover]="mouseHover[$index]">
             <div class="imgContainer">
                 <img src="{{item.img}}" alt="">
@@ -16,6 +16,11 @@
                 @if(item.unit_price> 30000){
                 <p class="free">Envio gratis</p>
                 }
+            </div>
+            <div class="btnCartContainer">
+              <button mat-fab class="btnCart ">
+                <mat-icon>shopping_cart</mat-icon>
+              </button>
             </div>
         </div>
         }
