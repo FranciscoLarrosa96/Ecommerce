@@ -29,6 +29,7 @@ export class CartComponent implements OnInit {
         });
     }
 
+    // TODO: Para mas adelante
     // calcularEnvio() {
     //     if (!this.codigoPostal) {
     //         alert("Ingrese un código postal válido");

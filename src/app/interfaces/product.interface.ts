@@ -9,5 +9,6 @@ export interface Product {
         description?: string
     },
     quantity?: number,
-    unit_price: number
+    unit_price: number,
+    features?: string[],
 }

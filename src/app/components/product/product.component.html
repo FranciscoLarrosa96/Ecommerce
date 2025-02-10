@@ -1,4 +1,4 @@
-<div class="productContainer h-full pt-0 pb-0 pr-7 pl-7"
+<div class="productContainer pt-6 pb-0 pr-7 pl-7"
     [class.tablet]="this.windowWidthSvc.deviceTypeComputed() === 'tablet'">
     <div class="relative w-full max-w-lg mx-auto mb-5">
         <!-- Contenedor del carrusel -->
@@ -6,23 +6,30 @@
             <div class="flex transition-transform duration-500 ease-in-out"
                 [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
                 @for (img of this._sharedSignalsService.productComputed().arrayImgs; track $index) {
-                <img [src]="img" class="w-full h-64 object-contain flex-shrink-0">
+                <div class="relative w-full h-64 flex-shrink-0 overflow-hidden">
+                    <img [src]="img"
+                         class="w-full h-full object-contain transition-transform duration-300"
+                         [style.transform]="currentIndex === $index ? 'scale(' + zoomScale + ')' : 'scale(1)'"
+                         [style.transform-origin]="zoomOrigin"
+                         (mousemove)="onMouseMove($event, $index)"
+                         (mouseleave)="resetZoom()">
+                </div>
                 }
             </div>
         </div>
-
+    
         <!-- Botón Anterior -->
         <button (click)="prevImage()"
             class="absolute top-1/2 left-2 transform -translate-y-1/2 w-8 h-8 bg-black/50 text-white rounded-full flex items-center justify-center hover:bg-black/70 transition">
             &#10094;
         </button>
-
+    
         <!-- Botón Siguiente -->
         <button (click)="nextImage()"
             class="absolute top-1/2 right-2 transform -translate-y-1/2 w-8 h-8 bg-black/50 text-white rounded-full flex items-center justify-center hover:bg-black/70 transition">
             &#10095;
         </button>
-
+    
         <!-- Indicadores -->
         <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
             @for (img of this._sharedSignalsService.productComputed().arrayImgs; track $index) {
@@ -32,6 +39,7 @@
             }
         </div>
     </div>
+    
     <mat-divider class="divider"></mat-divider>
     <div class="productContainer__info mt-5">
         <div class="mb-4">
@@ -55,12 +63,12 @@
         </div>
         <mat-divider class="divider"></mat-divider>
         <!-- Features -->
-        <!-- <div class="mt-4">
+        <div class="features-list mt-4 mb-4">
             <h2 class="text-xl font-bold">Características</h2>
             <ul class="list-disc list-inside">
                 @for (feature of this._sharedSignalsService.productComputed().features; track $index) {
-                <li>{{feature}}</li>
+                <li [innerHTML]="feature | boldLabel"></li>
                 }
             </ul>
-        </div> -->
+        </div>
     </div>

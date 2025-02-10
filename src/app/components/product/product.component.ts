@@ -5,11 +5,12 @@ import { SharedSignalsService } from '../../shared/services/shared-signals.servi
 import { CheckWindowsSiceService } from '../../shared/services/check-windows-sice.service';
 import { Product } from '../../interfaces/product.interface';
 import { NavigationEnd, Router } from '@angular/router';
+import { BoldLabelPipe } from '../../shared/bold-label-pipe.pipe';
 
 
 @Component({
     selector: 'app-product',
-    imports: [CommonModule, MaterialModule],
+    imports: [CommonModule, MaterialModule, BoldLabelPipe],
     templateUrl: './product.component.html',
     styleUrl: './product.component.scss'
 })
@@ -17,6 +18,8 @@ export class ProductComponent implements OnInit {
     _sharedSignalsService = inject(SharedSignalsService);
     windowWidthSvc = inject(CheckWindowsSiceService);
     currentIndex: number = 0;
+    zoomScale = 1; // Escala inicial
+    zoomOrigin = 'center'; // Punto de origen del zoom
     private _router = inject(Router);
     /**
      * Detect changes in the device size
@@ -32,6 +35,26 @@ export class ProductComponent implements OnInit {
             }
         });
     }
+
+
+    onMouseMove(event: MouseEvent, index: number) {
+        if (this.currentIndex !== index) return; // Aplica zoom solo a la imagen activa
+      
+        const { offsetX, offsetY, target } = event;
+        const { clientWidth, clientHeight } = target as HTMLImageElement;
+      
+        // Calcula la posición en porcentaje para el transform-origin
+        const x = (offsetX / clientWidth) * 100;
+        const y = (offsetY / clientHeight) * 100;
+      
+        this.zoomOrigin = `${x}% ${y}%`;
+        this.zoomScale = 3; // Ajusta el nivel de zoom según lo necesites
+      }
+      
+      resetZoom() {
+        this.zoomScale = 1;
+        this.zoomOrigin = 'center';
+      }
 
 
     ngOnInit(): void {
