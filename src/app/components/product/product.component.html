@@ -47,13 +47,20 @@
             @if (this._sharedSignalsService.productComputed().unit_price > 30000) {
             <p class="text-lg free">Envio gratis</p>
             }
-            <button class="bg-[#dd0e7c] text-white font-bold py-2 px-4 rounded-lg shadow-md 
+            <button (click)="addToCart()" class="bg-[#dd0e7c] text-white font-bold py-2 px-4 rounded-lg shadow-md 
   hover:bg-[#c20c6f] transition duration-300 ease-in-out absolute right-0 bottom-0">
                 Sumar al carrito
             </button>
 
         </div>
         <mat-divider class="divider"></mat-divider>
-        <!-- TODO: Tiene que llamarse en el carrito -->
-        <!-- <app-mercado-pago [product]="this._sharedSignalsService.productComputed()"/> -->
+        <!-- Features -->
+        <!-- <div class="mt-4">
+            <h2 class="text-xl font-bold">Características</h2>
+            <ul class="list-disc list-inside">
+                @for (feature of this._sharedSignalsService.productComputed().features; track $index) {
+                <li>{{feature}}</li>
+                }
+            </ul>
+        </div> -->
     </div>

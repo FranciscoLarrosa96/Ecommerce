@@ -11,7 +11,7 @@ export class MercadoPagoService {
   constructor() { }
 
 
-  getPreferenceId(body: Product) {
+  getPreferenceId(body: { items: Product[], zip_code: string }) {
     const headers: HttpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
     // Aquí deberías hacer una petición HTTP a tu backend para obtener el preferenceId
     return this._http.post(`${environment.API_MP}/crear-preferencia`, body, { headers });

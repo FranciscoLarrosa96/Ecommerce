@@ -16,7 +16,9 @@ const mp = new MercadoPago('TEST-e5a29134-d5f2-43e1-92eb-1358ded6d7f6', {
 })
 export class MercadoPagoComponent implements OnInit {
   private mercadoPagoService = inject(MercadoPagoService);
-  product = input<Product>({ id: '', title: '', quantity: 0, unit_price: 0 });
+  products = input<Product[]>([]);
+  precioTotal = input<number>(0);
+  zipCode = input<string>('');
   constructor() { }
 
   ngOnInit(): void {
@@ -24,15 +26,14 @@ export class MercadoPagoComponent implements OnInit {
   }
 
   initMercadoPago() {
-    const productTst: Product = {
-      id: this.product().id,
-      title: this.product().title,
-      quantity: this.product().quantity,
-      unit_price: this.product().unit_price,
-    };
+
+    const body = {
+      items: this.products(), // Tu array de productos en el carrito
+      zip_code: this.zipCode(), // Código postal ingresado por el usuario
+    }
     // Llamar al backend para obtener el preferenceId
     // Aquí deberías hacer una petición HTTP a tu backend para obtener el preferenceId
-    this.mercadoPagoService.getPreferenceId(productTst)
+    this.mercadoPagoService.getPreferenceId(body)
       .subscribe({
         next: (response: any) => {
           this.createCheckoutButton(response.id);
