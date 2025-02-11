@@ -11,4 +11,5 @@ export interface Product {
     quantity?: number,
     unit_price: number,
     features?: string[],
+    category?: string,
 }

@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { MercadoPagoComponent } from '../mercadopago/mercadopago.component';
 import { Product } from '../../interfaces/product.interface';
 import { SharedSignalsService } from '../../shared/services/shared-signals.service';
+import { MaterialModule } from '../../shared/material.module';
 
 @Component({
     selector: 'app-cart',
-    imports: [CommonModule, MercadoPagoComponent],
+    imports: [CommonModule, MercadoPagoComponent, MaterialModule],
     templateUrl: './cart.component.html',
     styleUrl: './cart.component.scss'
 })
@@ -17,16 +18,42 @@ export class CartComponent implements OnInit {
     precioTotal: number = 0;
     products = input<Product[]>([]);
     private _sharedSignalsService = inject(SharedSignalsService);
+
     constructor() {
-        this.products().forEach((product:Product) => this.precioTotal += product.unit_price);
-        console.log('precioTotal', this.precioTotal);
-        
-     }
+    }
     ngOnInit(): void {
+        this.loadCart();
+    }
+
+    loadCart() {
         // Cargar productos del carrito
         this._sharedSignalsService.cartComputed().forEach(element => {
             this.products().push(element);
         });
+    }
+
+    // Update quantity of product
+    updateQuantity(item: Product, change: number) {
+        if (item.quantity! + change > 0) {
+            item.quantity! += change;
+        }
+    }
+
+    // Calcular precio total de todos los productos
+    getTotal(): number {
+        return this.products().reduce((acc, item) => acc + (item.unit_price * item.quantity!), 0);
+    }
+
+
+    // Remove product from cart
+    removeFromCart(product: Product) {
+        const index = this.products().indexOf(product);
+        if (index > -1) {
+            this.products().splice(index, 1);
+        }
+        // Update cart and local storage
+        this._sharedSignalsService.cartSignal.set(this.products());
+        localStorage.setItem('cart', JSON.stringify(this.products()));
     }
 
     // TODO: Para mas adelante
