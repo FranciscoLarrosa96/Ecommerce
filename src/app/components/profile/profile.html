@@ -1,0 +1,21 @@
+<div class="profileContainer">
+  <p>
+    {{ this._authSvc.userLoggedComputed()| json}}
+  </p>
+</div>
+
+<button (click)="logout()" mat-fab extended>
+  <mat-icon>logout</mat-icon>
+  Logout
+</button>
+<!-- //TODO: Falta terminar -->
+@if (!this._authSvc.userLoggedComputed().emailVerified) {
+<div class="bg-pink-100  border-[#dd0e7c] text-[#dd0e7c] p-4 rounded-lg flex items-center space-x-4 w-3/6">
+  <svg class="w-6 h-6 text-[#dd0e7c]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+    stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+      d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 1010 10A10 10 0 0012 2z" />
+  </svg>
+  <p class="text-sm font-semibold">Por favor verifique su email</p>
+</div>
+}

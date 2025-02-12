@@ -1,0 +1,52 @@
+<form class="form" [formGroup]="loginForm">
+  <div class="flex-column">
+    <label>Email </label>
+  </div>
+  <div class="inputForm">
+    <img src="assets/icons/email.svg" alt="arroba">
+    <input placeholder="Enter your Email" class="input" type="text" formControlName="email">
+  </div>
+
+  <div class="flex-column">
+    <label>Password</label>
+  </div>
+  <div class="inputForm">
+    @if(inputPassword.type === 'text'){
+    <img (click)="inputPassword.type = 'password'" class="cursor-pointer" src="assets/icons/visible.svg"
+      alt="visibleIcon">
+    }@else{
+    <img (click)="inputPassword.type = 'text'" class="cursor-pointer" src="assets/icons/no-visible.svg"
+      alt="visibleIcon">
+    }
+    <input matInput #inputPassword placeholder="Enter your Password" class="input" type="password"
+      formControlName="password">
+  </div>
+
+  <div class="flex-row">
+    <div>
+      <mat-checkbox formControlName="remememberMe" class="example-margin">Remember me</mat-checkbox>
+    </div>
+  </div>
+  <button (click)="loginUser()" class="button-submit" [disabled]="this.showSpinner()"
+    [class.invalid]="this.loginForm.invalid || this.showSpinner()" [disabled]="this.loginForm.invalid">
+    @if(this.showSpinner()){
+    <mat-spinner color="warm"></mat-spinner>
+    }@else {
+    Login
+    }
+  </button>
+  <p class="p">Don't have an account? <span class="span cursor-pointer" (click)="openRegister()" >Register</span>
+
+  </p>
+  <p class="p line">Or With</p>
+
+  <div class="flex-row">
+    <div #btnGoogle id="g_id_onload"
+      data-client_id="684557034764-dot47pevhl29b9q3koj83vnkkim2v26l.apps.googleusercontent.com"
+      data-login_uri="https://your.domain/your_login_endpoint" data-auto_prompt="false">
+    </div>
+    <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="sign_in_with"
+      data-shape="rectangular" data-logo_alignment="left">
+    </div>
+  </div>
+</form>

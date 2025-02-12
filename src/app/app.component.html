@@ -1,0 +1,24 @@
+<mat-toolbar class="header mat-elevation-z3">
+    <img class="imgLogo" src="assets/logo/logo.webp" alt="">
+    <div class="logoAndTitle">
+        <h1 class="cursor-pointer" [routerLink]="'/home'">
+            Zona Tecno
+        </h1>
+    </div>
+    <div class="buttons">
+        <button mat-icon-button (click)="openCart()" matBadge="{{this.cart.length}}" matBadgePosition="before">
+            <img src="assets/icons/cart.svg" alt="cart-icon">
+        </button>
+        <button (click)="openLogin()" mat-icon-button>
+            <img src="assets/icons/user.svg" alt="user-icon">
+        </button>
+        <button mat-icon-button>
+            <img src="assets/icons/search.svg" alt="user-icon">
+        </button>
+    </div>
+</mat-toolbar>
+
+
+<router-outlet></router-outlet>
+
+<app-footer/>

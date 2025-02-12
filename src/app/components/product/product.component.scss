@@ -1,0 +1,19 @@
+.selectedPhoto,
+.arrow {
+    background-color: var(--main-color);
+}
+
+.divider{
+    border-top: 1px solid #edebec;
+}
+
+.free{
+    color: #00A650;
+}
+
+.features-list {
+    word-wrap: break-word; /* Para navegadores modernos */
+    overflow-wrap: break-word; /* Alternativa */
+    white-space: normal; /* Asegura que se rompa en espacios */
+  }
+  

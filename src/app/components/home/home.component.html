@@ -1,0 +1,24 @@
+<div class="homeContainer">
+    <div class="homeContainer__list">
+        @for (item of filteredProducts; track item.id) {
+        <div (click)="goToProduct(item)" class="card relative" (mouseenter)="showDescription($index)"
+            (mouseleave)="hiddenDescription($index)" [class.mouseHover]="mouseHover[$index]">
+            <div class="imgContainer">
+                <img src="{{item.img}}" alt="">
+            </div>
+            <div class="otherContainer">
+                <p class="titleProduct">{{item.title}}</p>
+                @if(item.review){
+                <p class="review fiveStars"></p>
+                }
+                <p class="price">$ {{item.unit_price| number}}</p>
+                <p class="cuotas">12 cuotas de $ {{(item.unit_price* 1.33) / 12 | number:'1.0-0'}}</p>
+                @if(item.unit_price> 30000){
+                <p class="free">Envio gratis</p>
+                }
+            </div>
+        </div>
+        }
+        <p class="text-red-800 version">v.1.4AlphaMP</p>
+    </div>
+</div>

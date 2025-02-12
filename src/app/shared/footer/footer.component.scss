@@ -1,0 +1,15 @@
+.footerContainer{
+   display: flex;
+   justify-content: center;
+}
+
+.footerContainer h3{
+   font-size: 18px;
+}
+
+@media screen and (min-width: 768px){
+   .footerContainer h3{
+       font-size: 21px;
+   }
+}
+

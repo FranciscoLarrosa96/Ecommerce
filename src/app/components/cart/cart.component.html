@@ -1,0 +1,68 @@
+<div class="cartContainer pb-5">
+    <h2 class="text-xl mt-5">Productos</h2>
+    <mat-divider class="divider"></mat-divider>
+
+    @if (this.products().length === 0) {
+        <p class="text-center text-gray-500 mt-4">Tu carrito está vacío 😢</p>
+    } @else {
+        <ul class="cartContainer__list">
+            @for (item of this.products(); track $index) {
+            <li class="cartContainer__list__item flex gap-4 border-b pb-4 mb-4">
+                <div class="cartContainer__list__item__img">
+                    <img [src]="item.img" alt="{{ item.title }}" class="w-28 h-auto object-cover">
+                </div>
+                <div class="cartContainer__list__item__info flex flex-col justify-between w-full">
+                    <p class="cartContainer__list__item__info__title font-bold">{{ item.title }}</p>
+                    <p class="cartContainer__list__item__info__price text-lg font-semibold text-gray-800">
+                        $ {{ item.unit_price | number }}
+                    </p>
+
+                    <div class="flex items-center gap-2 mt-2">
+                        <button (click)="updateQuantity(item, -1)" 
+                            class="px-3 py-1 bg-gray-300 text-black rounded">-</button>
+                        <p class="text-lg w-6 text-center">{{ item.quantity }}</p>
+                        <button (click)="updateQuantity(item, 1)" 
+                            class="px-3 py-1 bg-gray-300 text-black rounded">+</button>
+                    </div>
+
+                    <button (click)="removeFromCart(item)" 
+                        class="w-full mt-2 bg-[#dd0e7c] text-white font-bold py-2 px-4 rounded-lg shadow-md 
+                        hover:bg-[#c20c6f] transition duration-300 ease-in-out">
+                        Quitar del carrito
+                    </button>
+                </div>
+            </li>
+            }
+        </ul>
+
+        <!-- Sección de Total -->
+        <div class="cartContainer__total mt-6 p-4 bg-gray-100 rounded-lg shadow-md flex justify-between items-center">
+            <p class="text-xl font-semibold">Total:</p>
+            <p class="text-xl font-bold text-[#dd0e7c]">$ {{ getTotal() | number }}</p>
+        </div>
+    }
+</div>
+
+
+
+
+
+
+
+<!-- <div class="flex items-center gap-2">
+    <input #inputCod (input)="codigoPostal = inputCod.value" type="text" placeholder="Ingrese su código postal"
+        class="border p-2 rounded w-40 text-black">
+    <button #btnInteraction  class="bg-[#dd0e7c] text-white font-bold py-2 px-4 rounded-lg shadow-md 
+      hover:bg-[#c20c6f] transition duration-300 ease-in-out">
+        Calcular Envío
+    </button>
+</div>
+@if (costoEnvio !== null) {
+Costo de Envío: ${{ costoEnvio }}
+}
+
+@defer(on interaction(btnInteraction)){
+<app-mercado-pago [zipCode]="codigoPostal" [products]="products()" />
+} -->
+<!-- //TODO:Falta terminar que pasa luego del pago -->
+<app-mercado-pago [zipCode]="codigoPostal" [products]="products()" />

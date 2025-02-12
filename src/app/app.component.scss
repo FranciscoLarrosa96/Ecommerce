@@ -1,0 +1,65 @@
+mat-toolbar {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    justify-content: space-between;
+
+    > h1 {
+        font-size: 18px;
+    }
+}
+
+.logoAndTitle{
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    right: 40%;
+    > img {
+        width: 50px;
+        height: auto;
+    }
+}
+
+mat-sidenav-container {
+    height: calc(100vh - 56px);
+}
+
+.sideNav {
+    box-shadow: 5px 0px 5px -1px rgba(0, 0, 0, 0.44);
+    -webkit-box-shadow: 5px 0px 5px -1px rgba(0, 0, 0, 0.44);
+    -moz-box-shadow: 5px 0px 5px -1px rgba(0, 0, 0, 0.44);
+    border-radius: 0;
+}
+
+mat-sidenav, mat-sidenav-content {
+    transition: all 300ms ease-in-out;
+}
+
+.sidenavOpen::before {
+    content: ''; /* Necesario para que el pseudo-elemento se muestre */
+    position: fixed; /* Hace que el elemento ocupe toda la pantalla */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Ancho completo de la pantalla */
+    height: 100vh; /* Altura completa de la pantalla */
+    background-color: rgba(0, 0, 0, 0.5); /* Color semitransparente, opcional */
+    z-index: 999; /* Asegura que el overlay esté en la parte superior */
+  }
+
+  .header{
+    background-color: black;
+    color: white;
+  }
+
+  
+
+  .buttons{
+    position: absolute;
+    right: 2%;
+  }
+
+  .imgLogo{
+    position: absolute;
+    width: 126px;
+    left: -24px;
+  }
