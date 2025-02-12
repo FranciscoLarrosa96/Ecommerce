@@ -37,6 +37,9 @@ export class CartComponent implements OnInit {
         if (item.quantity! + change > 0) {
             item.quantity! += change;
         }
+        // Update cart and local storage
+        this._sharedSignalsService.cartSignal.set(this.products());
+        localStorage.setItem('cart', JSON.stringify(this.products()));
     }
 
     // Calcular precio total de todos los productos

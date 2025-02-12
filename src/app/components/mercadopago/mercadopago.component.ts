@@ -5,7 +5,7 @@ import { Product } from '../../interfaces/product.interface';
 
 declare var MercadoPago: any;
 
-const mp = new MercadoPago('TEST-e5a29134-d5f2-43e1-92eb-1358ded6d7f6', {
+const mp = new MercadoPago('APP_USR-deec67f8-e6ae-4d88-aadd-b8b8c32a27ef', {
   locale: 'es-AR', // Ajusta el idioma y la región según tu necesidad
 });
 
@@ -43,18 +43,25 @@ export class MercadoPagoComponent implements OnInit {
 
   createCheckoutButton(preferenceId: string) {
 
-    const bricksBuilder = mp.bricks();
-
-
-    bricksBuilder.create("wallet", "wallet_container", {
+    mp.bricks().create("wallet", "wallet_container", {
       initialization: {
         preferenceId: preferenceId,
-        redirectMode: "modal",
+        redirectMode: "modal"
       },
       customization: {
         texts: {
           valueProp: 'smart_option',
         },
+      },
+      // TODO: Falta agregar feedback luego de la compra
+      callbacks: {
+        onReady: () => {
+          console.log('Checkout is ready');
+        },
+        onSubmit: () => {
+          console.log('Checkout is submitting');
+        },
+        onError: (error:any) => console.error(error),
       },
     });
 
