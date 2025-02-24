@@ -1,4 +1,4 @@
-import { ApplicationConfig, inject, provideEnvironmentInitializer } from '@angular/core';
+import { ApplicationConfig, inject, provideEnvironmentInitializer, provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -9,5 +9,7 @@ import { SplashService } from './shared/services/splash-service.service';
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideHttpClient(withFetch(), withInterceptors([])),
   provideEnvironmentInitializer(() => inject(SplashService)),
-  provideAnimationsAsync(), provideAnimationsAsync()]
+  provideAnimationsAsync(),
+  provideExperimentalZonelessChangeDetection()
+]
 };

@@ -1,5 +1,5 @@
 @use '@angular/material' as mat;
-
+@use "sass:map";
 @include mat.elevation-classes();
 @include mat.app-background();
 
@@ -653,3 +653,27 @@ html {
 :root {
   --main-color: #dd0e7c;
 }
+
+// 📌 Definir los breakpoints globales
+$breakpoints: (
+  "mobile-s": 320px,
+  "mobile-m": 375px,
+  "mobile-l": 425px,
+  "mobile": 767px,  // Agregamos "mobile" para que lo reconozca el mixin
+  "tablet": 768px,
+  "desktop": 1024px
+);
+
+
+// 📌 Mixin para usar media queries de forma sencilla
+@mixin media($size) {
+  @if map.has-key($breakpoints, $size) { // Nueva sintaxis
+    @media (max-width: map.get($breakpoints, $size)) { // Usar map.get()
+      @content;
+    }
+  } @else {
+    @error "El breakpoint #{$size} no está definido en $breakpoints.";
+  }
+}
+
+

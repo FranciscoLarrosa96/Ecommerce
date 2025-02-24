@@ -5,29 +5,38 @@ import { computed, Injectable, signal } from '@angular/core';
 })
 export class CheckWindowsSiceService {
 
-  deviceTypeSingal = signal<string>('');
-  deviceTypeComputed = computed<string>(() => this.deviceTypeSingal());
-
+  private deviceTypeSingal = signal<string>('');
+  deviceTypeComputed = computed(() => this.deviceTypeSingal());
 
   constructor() {
-    this.getDeviceType();
-    window.addEventListener('resize', this.getDeviceType.bind(this));
+    this.updateDeviceType();
+    window.addEventListener('resize', this.onResize.bind(this));
   }
 
-  getDeviceType() {
+  private onResize() {
+    this.updateDeviceType();
+  }
+
+  private updateDeviceType() {
     const width = window.innerWidth;
-    if (width <= 768) {
-      if (width <= 320) {
-        this.deviceTypeSingal.set('mobile-s');
-      } else if (width <= 375) {
-        this.deviceTypeSingal.set('mobile-m');
-      } else if (width <= 425) {
-        this.deviceTypeSingal.set('mobile-l');
-      }
+    let newDeviceType = '';
+
+    if (width <= 320) {
+      newDeviceType = 'mobile-s';
+    } else if (width <= 375) {
+      newDeviceType = 'mobile-m';
+    } else if (width <= 425) {
+      newDeviceType = 'mobile-l';
+    } else if (width < 768) {
+      newDeviceType = 'mobile';
     } else if (width < 1024) {
-      this.deviceTypeSingal.set('tablet');
+      newDeviceType = 'tablet';
     } else {
-      this.deviceTypeSingal.set('desktop');
+      newDeviceType = 'desktop';
+    }
+
+    if (this.deviceTypeSingal() !== newDeviceType) {
+      this.deviceTypeSingal.set(newDeviceType);
     }
   }
 }

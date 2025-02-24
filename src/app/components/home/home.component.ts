@@ -1,13 +1,11 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit, effect, inject } from '@angular/core';
 import { Product } from '../../interfaces/product.interface';
 import { CommonModule } from '@angular/common';
-import { register } from 'swiper/element/bundle';
 import { Router, RouterModule } from '@angular/router';
 import { MaterialModule } from '../../shared/material.module';
 import { SharedSignalsService } from '../../shared/services/shared-signals.service';
 import { ProductService } from '../product/product.service';
-register();
-
+import { animate, style, transition, trigger } from '@angular/animations';
 @Component({
   selector: 'app-home',
   imports: [CommonModule, RouterModule, MaterialModule],
@@ -15,7 +13,17 @@ register();
   styleUrl: './home.component.scss',
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
+  ],
+  animations: [
+    trigger('fadeZoom', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'scale(0.9)' }), // Pequeño y opaco
+        animate('400ms ease-out', style({ opacity: 1, transform: 'scale(1)' })) // Se agranda con fade
+      ])
+    ])
+    
   ]
+  
 })
 export class HomeComponent implements OnInit {
   private _sharedSignalsService = inject(SharedSignalsService);

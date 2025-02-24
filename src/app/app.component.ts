@@ -23,9 +23,6 @@ export class AppComponent {
   title = 'Zona Tecno';
   switchTheme = new FormControl(false);
   darkMode = signal(false);
-  collapsed = signal(false);
-  withSidenav: string = '143px';
-  withSidenavContent: string = '0px';
   cart: Product[] = [];
   deviceType = inject(CheckWindowsSiceService);
   private sharedSignalSvc = inject(SharedSignalsService);
@@ -34,23 +31,19 @@ export class AppComponent {
   private _helperSvc = inject(HelperService);
 
   /**
- * Detect changes in the device size
- */
-  deviceTypeChange = effect(() => {
-    if (this.collapsed()) {
-      this.sharedSignalSvc.collapsedSidenavSignal.set(this.collapsed());
-      this.withSidenav = '143px';
-    } else {
-      this.sharedSignalSvc.collapsedSidenavSignal.set(this.collapsed());
-      this.withSidenav = '0px';
-    }
-  });
+  * Cambia el modo de la pagina
+  */
+  // setDarkMode = effect(() => {
+  //   document.documentElement.classList.toggle('dark', this.darkMode());
+  // });
+
 
   // Detect changes in the cart
   cartChange = effect(() => {
-    this.cart = this.sharedSignalSvc.cartComputed();
     if(this.cart === undefined || this.cart === null) {
       this.cart = [];
+    }else{
+      this.cart = this.sharedSignalSvc.cartComputed();
     }
   });
 
@@ -60,14 +53,7 @@ export class AppComponent {
       this.sharedSignalSvc.cartSignal.set(JSON.parse(localStorage.getItem('cart') as any));
   }
 
-  /**
-   * Cuando clickeo dentro del content cierro el sidenav
-   */
-  clickOnContent() {
-    if (this.collapsed()) {
-      this.collapsed.set(!this.collapsed());
-    }
-  }
+
 
 
   /**

@@ -6,6 +6,7 @@ import { CheckWindowsSiceService } from '../../shared/services/check-windows-sic
 import { Product } from '../../interfaces/product.interface';
 import { NavigationEnd, Router } from '@angular/router';
 import { BoldLabelPipe } from '../../shared/bold-label-pipe.pipe';
+import { SnackBarService } from '../../shared/services/snackbar.service';
 
 
 @Component({
@@ -21,6 +22,8 @@ export class ProductComponent implements OnInit {
     zoomScale = 1; // Escala inicial
     zoomOrigin = 'center'; // Punto de origen del zoom
     private _router = inject(Router);
+    private _snackbarService = inject(SnackBarService);
+    
     /**
      * Detect changes in the device size
      */
@@ -102,5 +105,7 @@ export class ProductComponent implements OnInit {
             localStorage.setItem('cart', JSON.stringify([this._sharedSignalsService.productComputed()]));
         }
         this._sharedSignalsService.cartSignal.set(JSON.parse(localStorage.getItem('cart') as any));
+
+        this._snackbarService.showMessage('Agregado al carrito');
     }
 }

@@ -1,10 +1,12 @@
 
-import { Component, inject, input, OnInit } from '@angular/core';
+import { Component, effect, inject, input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MercadoPagoComponent } from '../mercadopago/mercadopago.component';
 import { Product } from '../../interfaces/product.interface';
 import { SharedSignalsService } from '../../shared/services/shared-signals.service';
 import { MaterialModule } from '../../shared/material.module';
+import { CheckWindowsSiceService } from '../../shared/services/check-windows-sice.service';
+import { SnackBarService } from '../../shared/services/snackbar.service';
 
 @Component({
     selector: 'app-cart',
@@ -17,10 +19,20 @@ export class CartComponent implements OnInit {
     costoEnvio: number | null = null;
     precioTotal: number = 0;
     products = input<Product[]>([]);
+    windowWidthSvc = inject(CheckWindowsSiceService);
     private _sharedSignalsService = inject(SharedSignalsService);
+    private _snackBarSvc = inject(SnackBarService);
 
     constructor() {
     }
+
+    /**
+     * Detect changes in the device size
+     */
+    detectDevice = effect(() => {
+        console.log('deviceType', this.windowWidthSvc.deviceTypeComputed());
+    });
+
     ngOnInit(): void {
         this.loadCart();
     }
@@ -57,6 +69,7 @@ export class CartComponent implements OnInit {
         // Update cart and local storage
         this._sharedSignalsService.cartSignal.set(this.products());
         localStorage.setItem('cart', JSON.stringify(this.products()));
+        this._snackBarSvc.showMessage('Producto eliminado del carrito');
     }
 
     // TODO: Para mas adelante

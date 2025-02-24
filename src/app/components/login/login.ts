@@ -3,7 +3,6 @@ import { AfterViewInit, Component, effect, ElementRef, inject, OnInit, signal, V
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../../shared/material.module';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CheckWindowsSiceService } from '../../shared/services/check-windows-sice.service';
 import { AuthService } from '../../shared/services/auth.service';
 import { catchError, finalize, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -29,7 +28,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
   deviceSice = signal<string>('');
   dialogRef = inject(MatDialogRef<LoginComponent>);
   showSpinner = signal<boolean>(false);
-  private _checkWindowsSiceService = inject(CheckWindowsSiceService);
   private _authSvc = inject(AuthService);
   private _router = inject(Router);
   private _matDialog = inject(MatDialog);
@@ -39,13 +37,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
   constructor(private fb: FormBuilder) {
   }
 
-
-  /**
-   * Detect changes in the device size
-   */
-  deviceTypeChange = effect(() => {
-    this.deviceSice.set(this._checkWindowsSiceService.deviceTypeComputed());
-  });
 
   ngOnInit() {
     this.createForm();

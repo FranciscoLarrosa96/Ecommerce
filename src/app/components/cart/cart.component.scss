@@ -1,4 +1,66 @@
-.cartContainer{
+@use "../../../styles" as *; // Importa los mixins globales
+.cartContainer {
     width: 70%;
     margin: 0 auto;
+}
+
+
+
+.cartContainer {
+    @include media("mobile") {
+        .cartContainer__list__item button i {
+            font-size: 16px;
+        }
+
+        .cartContainer__list__item__info {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        /* Asegura que el icono de la papelera esté alineado con los botones de cantidad */
+        .cartContainer__list__item {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Ajusta la alineación del contenedor de información */
+        .cartContainer__list__item__info {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Mueve el botón de la papelera a la derecha */
+        .cartContainer__list__item__info button {
+            margin-left: auto;
+        }
+
+        .cartContainer__list__item__info button {
+            margin-left: 10px;
+            /* Agrega un pequeño margen entre "+" y la papelera */
+        }
+
+        .cartContainer__list__item__info {
+            flex-wrap: wrap;
+            /* Evita que el texto se corte */
+        }
+
+        .cartContainer__list__item__info>div {
+            min-width: 50%;
+        }
+    }
+}
+
+.deleteBtn {
+    background-color: #dd0e7c !important;
+    @include media("mobile-s") {
+        margin-top: 1rem !important;
+    }
+    @include media("mobile-m") {
+        margin-top: 1rem !important;
+    }
+
 }

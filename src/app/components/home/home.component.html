@@ -1,7 +1,7 @@
 <div class="homeContainer">
     <div class="homeContainer__list">
         @for (item of filteredProducts; track item.id) {
-        <div (click)="goToProduct(item)" class="card relative" (mouseenter)="showDescription($index)"
+        <div  @fadeZoom (click)="goToProduct(item)" class="card relative" (mouseenter)="showDescription($index)"
             (mouseleave)="hiddenDescription($index)" [class.mouseHover]="mouseHover[$index]">
             <div class="imgContainer">
                 <img src="{{item.img}}" alt="">
