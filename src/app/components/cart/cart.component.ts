@@ -1,7 +1,6 @@
 
 import { Component, effect, inject, input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MercadoPagoComponent } from '../mercadopago/mercadopago.component';
 import { Product } from '../../interfaces/product.interface';
 import { SharedSignalsService } from '../../shared/services/shared-signals.service';
 import { MaterialModule } from '../../shared/material.module';
@@ -10,7 +9,7 @@ import { SnackBarService } from '../../shared/services/snackbar.service';
 
 @Component({
     selector: 'app-cart',
-    imports: [CommonModule, MercadoPagoComponent, MaterialModule],
+    imports: [CommonModule, MaterialModule],
     templateUrl: './cart.component.html',
     styleUrl: './cart.component.scss'
 })
